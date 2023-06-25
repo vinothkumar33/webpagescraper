@@ -49,7 +49,7 @@ app.post("/addfavourite",async(req,res)=>{
     let id=req.body.id;
     let favourite=req.body.favourite;
     try{
-        const update_url = await UserModel.findOneAndUpdateOne({ _id:id},{"favourite":favourite},{new:true})
+        const update_url = await UserModel.findOneAndUpdate({ _id:id},{"favourite":favourite},{new:true})
         if (update_url) return res.status(200).json({message:' Updated Successfully'})
    
     } catch (error) {
