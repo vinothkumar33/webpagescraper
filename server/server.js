@@ -2,8 +2,8 @@ import express from "express";
 import Bodyparser  from 'body-parser';
 import cors from "cors";
 import config from "./config.js";
-import fetchUrlContent from "./count.js";
-import clean from "./count.js";
+import fetchUrlContent from "./content.js";
+import clean from "./clean.js";
 import count from "./count.js";
 import UserModel from "./schema.js";
 
@@ -39,7 +39,7 @@ app.post('/url',async(req,res)=>{
 
 app.get("/getdata",async(req,res)=>{
     try {
-        let result=await UserModel.findOne();
+        let result=await UserModel.find();
         res.status(200).json({data:result})
        } catch (error) {
         res.status(400).send(error.message)
