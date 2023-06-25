@@ -2,8 +2,8 @@ import express from "express";
 import Bodyparser  from 'body-parser';
 import cors from "cors";
 import config from "./config.js";
-import fetchUrlContent from "./count.js";
-import clean from "./count.js";
+import fetchUrlContent from "./content.js";
+import clean from "./clean.js";
 import count from "./count.js";
 import UserModel from "./schema.js";
 
@@ -39,7 +39,7 @@ app.post('/url',async(req,res)=>{
 
 app.get("/getdata",async(req,res)=>{
     try {
-        let result=await UserModel.findOne();
+        let result=await UserModel.find();
         res.status(200).json({data:result})
        } catch (error) {
         res.status(400).send(error.message)
@@ -49,7 +49,7 @@ app.post("/addfavourite",async(req,res)=>{
     let id=req.body.id;
     let favourite=req.body.favourite;
     try{
-        const update_url = await UserModel.findOneAndUpdateOne({ _id:id},{"favourite":favourite},{new:true})
+        const update_url = await UserModel.findOneAndUpdate({ _id:id},{"favourite":favourite},{new:true})
         if (update_url) return res.status(200).json({message:' Updated Successfully'})
    
     } catch (error) {
